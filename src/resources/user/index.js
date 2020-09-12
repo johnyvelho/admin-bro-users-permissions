@@ -48,7 +48,16 @@ function getOptions(resourceOptions = {}) {
     const baseOptions = {
         properties: {
             password: {
+                isVisible: false,
+            },
+            plainTextPassword: {
                 type: 'password',
+                isVisible: {
+                    list: false,
+                    edit: true,
+                    filter: false,
+                    show: false,
+                },
             },
         },
         actions: {
@@ -63,6 +72,7 @@ function getOptions(resourceOptions = {}) {
             },
             new: {
                 isAccessible: isAccessGranted({ resourceName: resourceName, actionRequested: 'edit' }),
+                before: transformPassword,
             },
             edit: {
                 isAccessible: isAccessGranted({ resourceName: resourceName, actionRequested: 'edit' }),
@@ -84,9 +94,22 @@ function getFeatures(resourceFeatures = []) {
         ...resourceFeatures,
         passwordFeature({
             properties: {
+                password: 'plainTextPassword',
                 encryptedPassword: 'password',
             },
             hash: argon2.hash,
         }),
     ]
+}
+
+async function transformPassword(request) {
+    if (request.payload.plainTextPassword) {
+        request.payload = {
+            ...request.payload,
+            password: await argon2.hash(request.payload.plainTextPassword),
+            plainTextPassword: undefined,
+        }
+    }
+
+    return request
 }
