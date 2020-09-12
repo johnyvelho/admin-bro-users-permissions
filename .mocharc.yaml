@@ -1,0 +1,9 @@
+reporter: spec
+extensions:
+    - ts
+    - js
+spec: ./test/**/*.test.*
+ui: bdd
+watch-files:
+    - ./test/*.js
+      
