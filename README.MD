@@ -78,6 +78,12 @@ app.use(cookieParser('secret'))
 app.use(cookieSession())
 ```
 
+Run migrations to create a Role and User in your database:
+```
+node ./node_modules/.bin/admin-bro-users-permissions-migrations --connectionString="mongodb://localhost:27017/yourDataBase"
+```
+You must receive the email and password to login in the panel
+
 Done :white_check_mark::tada::tada: 
 You now can start the AdminBro and you will see the login page and the Users & Roles resource.
 

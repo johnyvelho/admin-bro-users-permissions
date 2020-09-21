@@ -1,6 +1,6 @@
 {
   "name": "admin-bro-users-permissions",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": {
     "name": "Johny Velho",
     "url": "https://github.com/johnyvelho"
@@ -23,11 +23,15 @@
     "lint": "eslint . --ext .js",
     "lint-fix": "eslint . --fix --ext .js"
   },
+  "bin": {
+    "admin-bro-users-permissions-migrations": "./src/bin/migrations.js"
+  },
   "dependencies": {
     "@admin-bro/passwords": "^1.0.3",
     "argon2": "^0.27.0",
     "lodash": "^4.17.20",
-    "mongoose": "^5.10.5"
+    "mongoose": "^5.10.5",
+    "yargs": "^16.0.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",

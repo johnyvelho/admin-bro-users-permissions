@@ -26,7 +26,13 @@ describe('authentication', function () {
 
     it('returns true. user matched', async function () {
         const userModelStub = {
-            findOne: stub().returns({ email: 'email@email.com', password: await argon2.hash('123') }),
+            findOne: stub().returns({
+                email: 'email@email.com',
+                password: await argon2.hash('123'),
+                _doc: {
+                    email: 'email@email.com',
+                },
+            }),
         }
         const roleModelStub = {
             findById: stub().returns({}),

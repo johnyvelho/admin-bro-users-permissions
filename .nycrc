@@ -7,7 +7,8 @@
     "exclude": [
       "**/*.spec.js",
       "src/policies/isAccessGranted.js",
-      "src/resources/*"
+      "src/resources/*",
+      "src/bin/*"
     ],
     "reporter": ["text", "text-summary", "lcov", "html"]
 }
