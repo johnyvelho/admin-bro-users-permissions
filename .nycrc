@@ -8,6 +8,7 @@
       "**/*.spec.js",
       "src/policies/isAccessGranted.js",
       "src/resources/*",
+      "src/utils/password.js",
       "src/bin/*"
     ],
     "reporter": ["text", "text-summary", "lcov", "html"]

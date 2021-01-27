@@ -1,9 +1,9 @@
 // const mongoose = require('mongoose')
 const passwordFeature = require('@admin-bro/passwords')
-const argon2 = require('argon2')
 const merge = require('lodash/fp/merge')
 const { resourceName: roleResourceName } = require('./../role')
 const isAccessGranted = require('./../../policies/isAccessGranted')
+const { generateHash } = require('./../../utils/password')
 
 const resourceName = 'User'
 
@@ -14,6 +14,7 @@ module.exports = {
     getModel,
     getOptions,
     getFeatures,
+    transformPassword,
 }
 
 function initResource(mongoose, { resourceSchema, resourceOptions, resourceFeatures }) {
@@ -72,7 +73,7 @@ function getOptions(resourceOptions = {}) {
             },
             new: {
                 isAccessible: isAccessGranted({ resourceName: resourceName, actionRequested: 'edit' }),
-                before: transformPassword,
+                before: transformPassword('plainTextPassword', 'password'),
             },
             edit: {
                 isAccessible: isAccessGranted({ resourceName: resourceName, actionRequested: 'edit' }),
@@ -97,19 +98,21 @@ function getFeatures(resourceFeatures = []) {
                 password: 'plainTextPassword',
                 encryptedPassword: 'password',
             },
-            hash: argon2.hash,
+            hash: generateHash,
         }),
     ]
 }
 
-async function transformPassword(request) {
-    if (request.payload.plainTextPassword) {
-        request.payload = {
-            ...request.payload,
-            password: await argon2.hash(request.payload.plainTextPassword),
-            plainTextPassword: undefined,
+function transformPassword(plainTextPasswordFieldName = 'plainTextPassword', passwordFieldName = 'password') {
+    return async function (request) {
+        if (request.payload[plainTextPasswordFieldName]) {
+            request.payload = {
+                ...request.payload,
+                [passwordFieldName]: await generateHash(request.payload[plainTextPasswordFieldName]),
+                [plainTextPasswordFieldName]: undefined,
+            }
         }
-    }
 
-    return request
+        return request
+    }
 }
