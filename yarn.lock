@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@admin-bro/passwords@^1.0.3":
+"@adminjs/passwords@^2.0.0":
   version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@admin-bro/passwords/-/passwords-1.0.3.tgz#8729dac3d231bff0eece1764a4d95829b8cc9db6"
+  resolved "https://registry.yarnpkg.com/@adminjs/passwords/-/passwords-2.0.0.tgz#8729dac3d231bff0eece1764a4d95829b8cc9db6"
   integrity sha512-ZhxWEe3h9w1pHBXZzLyxY1vBxFDdjRy/Hr9EEMjv7Zk8lJs7FbE6J5ry8f7AFadKYaWHK8oG7o1rdWKbNf8WjA==
   dependencies:
     aws-sdk "^2.728.0"
