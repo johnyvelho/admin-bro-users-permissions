@@ -15,10 +15,10 @@ npm install express-session
 
 Import the resources and the authentication closure
 ```
-const userResource = require('admin-bro-user-permissions/resources/user')
-const roleResource = require('admin-bro-user-permissions/resources/role')
-const { authenticationClosure } = require('admin-bro-user-permissions/authentication')
-const isAccessGranted = require('admin-bro-user-permissions/policies/isAccessGranted')
+const userResource = require('admin-bro-users-permissions/resources/user')
+const roleResource = require('admin-bro-users-permissions/resources/role')
+const { authenticationClosure } = require('admin-bro-users-permissions/authentication')
+const isAccessGranted = require('admin-bro-users-permissions/policies/isAccessGranted')
 ```
 
 Set the resources to the AdminBro. eg:
