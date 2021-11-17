@@ -15,10 +15,10 @@ npm install express-session
 
 Import the resources and the authentication closure
 ```
-const userResource = require('admin-bro-user-permissions/resources/user')
-const roleResource = require('admin-bro-user-permissions/resources/role')
-const { authenticationClosure } = require('admin-bro-user-permissions/authentication')
-const isAccessGranted = require('admin-bro-user-permissions/policies/isAccessGranted')
+const userResource = require('admin-bro-users-permissions/resources/user')
+const roleResource = require('admin-bro-users-permissions/resources/role')
+const { authenticationClosure } = require('admin-bro-users-permissions/authentication')
+const isAccessGranted = require('admin-bro-users-permissions/policies/isAccessGranted')
 ```
 
 Set the resources to the AdminBro. eg:
@@ -107,9 +107,9 @@ authentication | (email, password) <br><br>Returns: False *or* Object({email: St
 Lets suppose besides all the login validations, you want to extend and add your own. You could do it using the authentication method. eg:
 
 ```
-const userResource = require('admin-bro-user-permissions/resources/user')
-const roleResource = require('admin-bro-user-permissions/resources/role')
-const { authentication } = require('admin-bro-user-permissions/authentication')
+const userResource = require('admin-bro-users-permissions/resources/user')
+const roleResource = require('admin-bro-users-permissions/resources/role')
+const { authentication } = require('admin-bro-users-permissions/authentication')
 
 const authenticationClosure = () => {
     return async (email, password) => {
@@ -133,7 +133,7 @@ isAccessGranted | Object({resourceName: String, actionRequested: String})
 You can also add business logic to policy. eg:
 
 ```
-const isAccessGranted = require('admin-bro-user-permissions/policies/isAccessGranted')
+const isAccessGranted = require('admin-bro-users-permissions/policies/isAccessGranted')
 
 const myPolicy = ({ currentAdmin }) => {
     const isAccessGrantedClosure = isAccessGranted({ resourceName: 'Store', actionRequested: 'list' })
