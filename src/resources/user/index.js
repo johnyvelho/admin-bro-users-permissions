@@ -1,5 +1,5 @@
 // const mongoose = require('mongoose')
-const passwordFeature = require('@admin-bro/passwords')
+const passwordFeature = require('@adminjs/passwords')
 const merge = require('lodash/fp/merge')
 const { resourceName: roleResourceName } = require('./../role')
 const isAccessGranted = require('./../../policies/isAccessGranted')

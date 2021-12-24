@@ -1,5 +1,5 @@
 {
-  "name": "admin-bro-users-permissions",
+  "name": "admin-js-users-permissions",
   "version": "1.0.4",
   "author": {
     "name": "Johny Velho",
@@ -7,12 +7,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/johnyvelho/admin-bro-users-permissions"
+    "url": "https://github.com/johnyvelho/admin-js-users-permissions"
   },
   "bugs": {
-    "url": "https://github.com/johnyvelho/admin-bro-users-permissions/issues"
+    "url": "https://github.com/johnyvelho/admin-js-users-permissions/issues"
   },
-  "homepage": "https://github.com/johnyvelho/admin-bro-users-permissions/blob/master/README.MD",
+  "homepage": "https://github.com/johnyvelho/admin-js-users-permissions/blob/master/README.MD",
   "license": "MIT",
   "exports": {
     "./": "./src/"
@@ -24,10 +24,10 @@
     "lint-fix": "eslint . --fix --ext .js"
   },
   "bin": {
-    "admin-bro-users-permissions-migrations": "./src/bin/migrations.js"
+    "admin-js-users-permissions-migrations": "./src/bin/migrations.js"
   },
   "dependencies": {
-    "@admin-bro/passwords": "^1.0.3",
+    "@adminjs/passwords": "^1.0.3",
     "argon2": "^0.27.0",
     "lodash": "^4.17.20",
     "mongoose": "^5.10.5",
@@ -49,7 +49,7 @@
     "mongoose",
     "admin",
     "admin-panel",
-    "admin-bro",
+    "admin-js",
     "users",
     "permissions",
     "users and permissions",

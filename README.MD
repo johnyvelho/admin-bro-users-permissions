@@ -1,4 +1,4 @@
-# Admin Bro: Users & Permisions
+# AdminJS: Users & Permisions
 
 Library to easily implement a Role-Based Access Control(RBAC). Highly extensible, this library will help you to have an Admin Login Page and inside the admin, 2 Resources: Users and Roles.
 **Only for Mongoose**
@@ -8,20 +8,20 @@ Library to easily implement a Role-Based Access Control(RBAC). Highly extensible
 
 ## Getting Started
 ```
-npm install admin-bro-users-permissions
+npm install admin-js-users-permissions
 npm install cookie-parser
 npm install express-session
 ```
 
 Import the resources and the authentication closure
 ```
-const userResource = require('admin-bro-users-permissions/resources/user')
-const roleResource = require('admin-bro-users-permissions/resources/role')
-const { authenticationClosure } = require('admin-bro-users-permissions/authentication')
-const isAccessGranted = require('admin-bro-users-permissions/policies/isAccessGranted')
+const userResource = require('admin-js-user-permissions/resources/user')
+const roleResource = require('admin-js-user-permissions/resources/role')
+const { authenticationClosure } = require('admin-js-user-permissions/authentication')
+const isAccessGranted = require('admin-js-user-permissions/policies/isAccessGranted')
 ```
 
-Set the resources to the AdminBro. eg:
+Set the resources to the AdminJs. eg:
 ```
 const storeResource = {
     resource: mongoose.model('Store', {
@@ -40,7 +40,7 @@ const storeResource = {
     }
 }
 
-const adminBro = new AdminBro({
+const adminJs = new AdminJs({
         resources: [
             ...storeResource,
             userResource.initResource(mongoose, {
@@ -67,7 +67,7 @@ const adminBro = new AdminBro({
 
 Build the authentication route passing the authentication closure:
 ```
-const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
+const router = AdminJsExpress.buildAuthenticatedRouter(adminJs, {
     authenticate: authenticationClosure({ userModel: userResource.getModel(mongoose), roleModel: roleResource.getModel(mongoose) }),
 })
 ```
@@ -80,12 +80,12 @@ app.use(cookieSession())
 
 Run migrations to create a Role and User in your database:
 ```
-node ./node_modules/.bin/admin-bro-users-permissions-migrations --connectionString="mongodb://localhost:27017/yourDataBase"
+node ./node_modules/.bin/admin-js-users-permissions-migrations --connectionString="mongodb://localhost:27017/yourDataBase"
 ```
 You must receive the email and password to login in the panel
 
 Done :white_check_mark::tada::tada: 
-You now can start the AdminBro and you will see the login page and the Users & Roles resource.
+You now can start the AdminJs and you will see the login page and the Users & Roles resource.
 
 ## Highly extensible
 You have access to all the pieces which is building this library. With that, you can extend or even create your on pieces to overwrite the main one.
@@ -93,10 +93,10 @@ You have access to all the pieces which is building this library. With that, you
 ##### Resources Methods
 Method | Parameters
 ------ | -------
-initResource | [mongoose](https://mongoosejs.com/docs/api/mongoose.html), Object{resourceSchema: [Mongoose Object Schema](https://mongoosejs.com/docs/schematypes.html), resourceOptions: [ResourceOptions](https://adminbro.com/ResourceOptions.html), resourceFeatures: [Array of Features](https://adminbro.com/tutorial-features.html)} <br><br> Returns: Array<[AdminBro Resources](https://adminbro.com/AdminBro.html#resourcesl)>
+initResource | [mongoose](https://mongoosejs.com/docs/api/mongoose.html), Object{resourceSchema: [Mongoose Object Schema](https://mongoosejs.com/docs/schematypes.html), resourceOptions: [ResourceOptions](https://adminjs.co/ResourceOptions.html), resourceFeatures: [Array of Features](https://adminjs.co/tutorial-features.html)} <br><br> Returns: Array<[AdminJs Resources](https://adminjs.co/AdminJs.html#resourcesl)>
 getSchema | [mongoose](https://mongoosejs.com/docs/api/mongoose.html), Object{[Mongoose Object Schema](https://mongoosejs.com/docs/schematypes.html)} <br><br>Returns: [Mongoose Schema](https://mongoosejs.com/docs/guide.html)
-getOptions | Object{[ResourceOptions](https://adminbro.com/ResourceOptions.html)} <br><br>Returns: [Object of ResourceOptions](https://adminbro.com/ResourceOptions.html)
-getFeatures | Array<[Features](https://adminbro.com/tutorial-features.html)> <br><br>Returns: Array of AdminBro Features
+getOptions | Object{[ResourceOptions](https://adminjs.co/ResourceOptions.html)} <br><br>Returns: [Object of ResourceOptions](https://adminjs.co/ResourceOptions.html)
+getFeatures | Array<[Features](https://adminjs.co/tutorial-features.html)> <br><br>Returns: Array of AdminJs Features
 
 ##### Authentication
 Method | Parameters
@@ -107,9 +107,9 @@ authentication | (email, password) <br><br>Returns: False *or* Object({email: St
 Lets suppose besides all the login validations, you want to extend and add your own. You could do it using the authentication method. eg:
 
 ```
-const userResource = require('admin-bro-users-permissions/resources/user')
-const roleResource = require('admin-bro-users-permissions/resources/role')
-const { authentication } = require('admin-bro-users-permissions/authentication')
+const userResource = require('admin-js-user-permissions/resources/user')
+const roleResource = require('admin-js-user-permissions/resources/role')
+const { authentication } = require('admin-js-user-permissions/authentication')
 
 const authenticationClosure = () => {
     return async (email, password) => {
@@ -120,7 +120,7 @@ const authenticationClosure = () => {
     }
 }
 
-const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
+const router = AdminJsExpress.buildAuthenticatedRouter(adminJs, {
     authenticate: authenticationClosure,
 })
 ```
@@ -133,7 +133,7 @@ isAccessGranted | Object({resourceName: String, actionRequested: String})
 You can also add business logic to policy. eg:
 
 ```
-const isAccessGranted = require('admin-bro-users-permissions/policies/isAccessGranted')
+const isAccessGranted = require('admin-js-user-permissions/policies/isAccessGranted')
 
 const myPolicy = ({ currentAdmin }) => {
     const isAccessGrantedClosure = isAccessGranted({ resourceName: 'Store', actionRequested: 'list' })
