@@ -8,17 +8,17 @@ Library to easily implement a Role-Based Access Control(RBAC). Highly extensible
 
 ## Getting Started
 ```
-npm install admin-js-users-permissions
+npm install admin-bro-users-permissions
 npm install cookie-parser
 npm install express-session
 ```
 
 Import the resources and the authentication closure
 ```
-const userResource = require('admin-js-user-permissions/resources/user')
-const roleResource = require('admin-js-user-permissions/resources/role')
-const { authenticationClosure } = require('admin-js-user-permissions/authentication')
-const isAccessGranted = require('admin-js-user-permissions/policies/isAccessGranted')
+const userResource = require('admin-bro-users-permissions/resources/user')
+const roleResource = require('admin-bro-users-permissions/resources/role')
+const { authenticationClosure } = require('admin-bro-users-permissions/authentication')
+const isAccessGranted = require('admin-bro-users-permissions/policies/isAccessGranted')
 ```
 
 Set the resources to the AdminJs. eg:
@@ -80,7 +80,7 @@ app.use(cookieSession())
 
 Run migrations to create a Role and User in your database:
 ```
-node ./node_modules/.bin/admin-js-users-permissions-migrations --connectionString="mongodb://localhost:27017/yourDataBase"
+node ./node_modules/.bin/admin-bro-users-permissions-migrations --connectionString="mongodb://localhost:27017/yourDataBase"
 ```
 You must receive the email and password to login in the panel
 
@@ -107,9 +107,9 @@ authentication | (email, password) <br><br>Returns: False *or* Object({email: St
 Lets suppose besides all the login validations, you want to extend and add your own. You could do it using the authentication method. eg:
 
 ```
-const userResource = require('admin-js-user-permissions/resources/user')
-const roleResource = require('admin-js-user-permissions/resources/role')
-const { authentication } = require('admin-js-user-permissions/authentication')
+const userResource = require('admin-bro-users-permissions/resources/user')
+const roleResource = require('admin-bro-users-permissions/resources/role')
+const { authentication } = require('admin-bro-users-permissions/authentication')
 
 const authenticationClosure = () => {
     return async (email, password) => {
@@ -133,7 +133,7 @@ isAccessGranted | Object({resourceName: String, actionRequested: String})
 You can also add business logic to policy. eg:
 
 ```
-const isAccessGranted = require('admin-js-user-permissions/policies/isAccessGranted')
+const isAccessGranted = require('admin-bro-users-permissions/policies/isAccessGranted')
 
 const myPolicy = ({ currentAdmin }) => {
     const isAccessGrantedClosure = isAccessGranted({ resourceName: 'Store', actionRequested: 'list' })
